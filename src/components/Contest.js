@@ -4,15 +4,15 @@ import { useEffect,useState } from "react";
 
 
 const Contest = () => {
-  const [contest, setContest] = useState({title: ''});
+  const [contest, setContest] = useState({title: [], duration: '',start: '',site : ''});
   useEffect(() => {
     const url = `https://kontests.net/api/v1/all`;
     const fetchData = async () => {
       try {
         const response = await fetch(url);
-        const json = await response.json();
+        let json = await response.json();
         console.log(json);
-        setContest({title: json[5].name})
+        setContest({title: json})
         
       } catch (error) {
         console.log("error", error);
@@ -22,8 +22,22 @@ const Contest = () => {
     fetchData();
   }, []);
   return (
-    <div>
-      <ContestItem title = {contest.title} />
+    <div className="container">
+      <table className="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Event</th>
+          <th scope="col">Start time</th>
+          <th scope="col">Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+
+          {contest.title.map((e)=>{
+                return (<ContestItem title = {e.name} start={e.start_time} duration={e.duration} key={e.name}/>); 
+          })}
+      </tbody>
+    </table>
     </div>
   );
 };
