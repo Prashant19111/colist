@@ -4,7 +4,7 @@ import { useEffect,useState } from "react";
 
 
 const Contest = () => {
-  const [contest, setContest] = useState({title: [], duration: '',start: '',site : ''});
+  const [contest, setContest] = useState({title: []});
   useEffect(() => {
     const url = `https://kontests.net/api/v1/all`;
     const fetchData = async () => {
@@ -26,6 +26,7 @@ const Contest = () => {
       <table className="table table-dark table-striped">
       <thead>
         <tr>
+          <th scope="col">S.No.</th>
           <th scope="col">Event</th>
           <th scope="col">Start time</th>
           <th scope="col">Duration</th>
@@ -33,8 +34,8 @@ const Contest = () => {
       </thead>
       <tbody>
 
-          {contest.title.map((e)=>{
-                return (<ContestItem title = {e.name} start={e.start_time} duration={e.duration} key={e.name}/>); 
+          {contest.title.map((e,idx)=>{
+                return (<ContestItem title = {e.name} start={e.start_time} duration={e.duration} key={e.name} idx={idx} url={e.url}/>); 
           })}
       </tbody>
     </table>
