@@ -167,7 +167,7 @@ router.post('/login',[
             res.status(500).send("Internal Server Error");
         }
     });
-// ROUTE3 : Get logged in user details using POST "/api/auth/getUser"- login required
+// ROUTE3 : Get logged in user details using POST "/api/auth/getuser"- login required
 router.post('/getuser',fetchuser,async (req,res)=>{
 try {
    userId=req.user.id;
