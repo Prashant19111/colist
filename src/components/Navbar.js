@@ -18,9 +18,10 @@ const Navbar = () => {
         <li className="nav-item">
           <Link className="nav-link active" aria-current="page" to="/">Home</Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to='/'>Link</Link>
-        </li>
+        {
+        !localStorage.getItem('token')?` `:
+        <Link className="nav-link active" aria-current="page" to="/mycontest">My Contests</Link>
+      }
       </ul>
       {
         !localStorage.getItem('token')?<form className="d-flex">

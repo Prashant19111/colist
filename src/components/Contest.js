@@ -3,8 +3,8 @@ import { ContestItem } from "./ContestItem";
 import { useEffect,useState } from "react";
 
 
-const Contest = () => {
-  const [contest, setContest] = useState({title: []});
+const Contest = (props) => {
+  const [contest, setContest] = useState({title:[]});
   useEffect(() => {
     const url = `https://kontests.net/api/v1/all`;
     const fetchData = async () => {
@@ -30,12 +30,13 @@ const Contest = () => {
           <th scope="col">Event</th>
           <th scope="col">Start time</th>
           <th scope="col">Duration</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
 
           {contest.title.map((e,idx)=>{
-                return (<ContestItem title = {e.name} start={e.start_time} duration={e.duration} key={e.name} idx={idx} url={e.url}/>); 
+                return (<ContestItem title = {e.name} start={e.start_time} duration={e.duration} key={e.name} idx={idx} url={e.url} showAlert={props.showAlert}/>); 
           })}
       </tbody>
     </table>
